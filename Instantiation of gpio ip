@@ -1,0 +1,15 @@
+gpio u_gpio (
+    .clk   (clk),
+    .reset (resetn),
+    .we    (gpio_we),
+    .wdata (mem_wdata),
+    .rdata (gpio_rdata),
+    .gpio_out (gpio_out)
+);
+
+localparam GPIO_BASE = 32'h2000_0000;
+
+wire gpio_sel = (mem_addr == GPIO_BASE);
+
+assign gpio_we = mem_we & gpio_sel;
+
